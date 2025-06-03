@@ -6,11 +6,9 @@ import 'model/product_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Hive.initFlutter();
 
   Hive.registerAdapter(ProductAdapter());
-
   await Hive.openBox<Product>('products');
 
   runApp(const MyApp());

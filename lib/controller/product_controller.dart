@@ -1,7 +1,6 @@
 import 'package:flutter_dev/hives/hive_box.dart';
 import 'package:flutter_dev/services/api_service.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import '../model/category_model.dart';
 import '../model/product_model.dart';
 
@@ -17,9 +16,6 @@ class ProductController extends GetxController {
   void onInit() {
     super.onInit();
     loadData();
-    final productsBox = Hive.box<Product>('products');
-    final products = productsBox.values.toList();
-    setProducts(products);
   }
 
   void loadData() async {
@@ -58,6 +54,7 @@ class ProductController extends GetxController {
     }
 
     products.value = box.values.toList();
+    setProducts(products.toList());
   }
 
   void filterProducts(String subSubcategoryName) {
@@ -74,7 +71,15 @@ class ProductController extends GetxController {
   }
 
   void toggleFavorite(int productId) {
-    favoriteMap[productId] = !(favoriteMap[productId] ?? false);
+    final current = favoriteMap[productId] ?? false;
+    favoriteMap[productId] = !current;
+
+    final box = HiveBoxes.getProductsBox();
+    final product = box.get(productId);
+    if (product != null) {
+      product.isFavorite = !current;
+      product.save();
+    }
   }
 
   bool isFavorite(int productId) {
