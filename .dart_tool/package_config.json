@@ -74,6 +74,12 @@
       "languageVersion": "3.7"
     },
     {
+      "name": "get",
+      "rootUri": "file:///C:/Users/jariw/AppData/Local/Pub/Cache/hosted/pub.dev/get-4.7.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "hive",
       "rootUri": "file:///C:/Users/jariw/AppData/Local/Pub/Cache/hosted/pub.dev/hive-2.2.3",
       "packageUri": "lib/",
@@ -272,7 +278,7 @@
       "languageVersion": "3.6"
     }
   ],
-  "generated": "2025-06-03T09:41:58.630397Z",
+  "generated": "2025-06-03T09:53:56.200809Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///C:/Users/jariw/fvm/versions/3.29.3",
