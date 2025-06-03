@@ -7,7 +7,6 @@ class ApiService {
         Uri.parse('https://mocki.io/v1/cfa1ca14-b058-4b1b-9589-af167ed16f37'));
     final data = jsonDecode(response.body);
 
-    // parse categories and products here or return raw map
     return data;
   }
 }
