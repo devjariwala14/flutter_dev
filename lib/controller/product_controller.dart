@@ -1,6 +1,7 @@
 import 'package:flutter_dev/hives/hive_box.dart';
 import 'package:flutter_dev/services/api_service.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import '../model/category_model.dart';
 import '../model/product_model.dart';
 
@@ -8,6 +9,7 @@ class ProductController extends GetxController {
   var categories = <Category>[].obs;
   var products = <Product>[].obs;
   var filteredProducts = <Product>[].obs;
+  final favoriteMap = <int, bool>{}.obs;
 
   RxString selectedSubSubcategory = ''.obs;
 
@@ -15,6 +17,9 @@ class ProductController extends GetxController {
   void onInit() {
     super.onInit();
     loadData();
+    final productsBox = Hive.box<Product>('products');
+    final products = productsBox.values.toList();
+    setProducts(products);
   }
 
   void loadData() async {
@@ -61,13 +66,18 @@ class ProductController extends GetxController {
         products.where((p) => p.subcategory == subSubcategoryName).toList();
   }
 
-  void toggleFavorite(int id) {
-    final box = HiveBoxes.getProductsBox();
-    final product = box.get(id);
-    if (product != null) {
-      product.isFavorite = !product.isFavorite;
-      product.save();
-      filteredProducts.refresh();
+  void setProducts(List<Product> fetched) {
+    products.value = fetched;
+    for (var p in fetched) {
+      favoriteMap[p.id] = p.isFavorite;
     }
+  }
+
+  void toggleFavorite(int productId) {
+    favoriteMap[productId] = !(favoriteMap[productId] ?? false);
+  }
+
+  bool isFavorite(int productId) {
+    return favoriteMap[productId] ?? false;
   }
 }

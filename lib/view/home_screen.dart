@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Product App')),
+      appBar: AppBar(title: Text('Ecommerce App')),
       drawer: Drawer(
         child: Obx(() {
           return ListView(
