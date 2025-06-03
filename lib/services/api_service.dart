@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../model/category_model.dart';
-import '../model/product_model.dart';
 
 class ApiService {
   static Future<Map<String, dynamic>> fetchData() async {
