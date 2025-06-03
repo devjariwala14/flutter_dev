@@ -38,12 +38,16 @@ class HomePage extends StatelessWidget {
         }),
       ),
       body: Obx(() {
-        return GridView.count(
-          crossAxisCount: 2,
-          children: controller.filteredProducts
-              .map((product) => ProductCard(product))
-              .toList(),
-        );
+        return (controller.filteredProducts.isNotEmpty)
+            ? GridView.count(
+                crossAxisCount: controller.filteredProducts.length,
+                children: controller.filteredProducts
+                    .map((product) => ProductCard(product))
+                    .toList(),
+              )
+            : Center(
+                child: Text('Please a category to view products'),
+              );
       }),
     );
   }

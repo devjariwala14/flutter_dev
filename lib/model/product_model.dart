@@ -1,6 +1,5 @@
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:hive/hive.dart';
-
-part 'product_model.g.dart';
 
 @HiveType(typeId: 0)
 class Product extends HiveObject {
@@ -22,6 +21,8 @@ class Product extends HiveObject {
   @HiveField(5)
   bool isFavorite;
 
+  late RxBool isFavoriteRx;
+
   Product({
     required this.id,
     required this.title,
@@ -29,5 +30,13 @@ class Product extends HiveObject {
     required this.image,
     required this.subcategory,
     this.isFavorite = false,
-  });
+  }) {
+    isFavoriteRx = isFavorite.obs;
+
+    // Optional: Update plain bool when reactive value changes
+    isFavoriteRx.listen((val) {
+      isFavorite = val;
+      save(); // Save to Hive if needed
+    });
+  }
 }
