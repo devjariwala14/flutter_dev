@@ -17,12 +17,11 @@ class ProductCard extends StatelessWidget {
           Image.network(product.image, height: 100, width: 100),
           Text(product.title),
           Text('\$${product.price}'),
-          Obx(() => IconButton(
-                icon: Icon(product.isFavoriteRx.value
-                    ? Icons.favorite
-                    : Icons.favorite_border),
-                onPressed: () => controller.toggleFavorite(product.id),
-              )),
+          IconButton(
+            icon: Icon(
+                product.isFavorite ? Icons.favorite : Icons.favorite_border),
+            onPressed: () => controller.toggleFavorite(product.id),
+          )
         ],
       ),
     );
