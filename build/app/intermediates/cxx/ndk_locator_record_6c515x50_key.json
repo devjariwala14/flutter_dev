@@ -1,0 +1,12 @@
+{
+  "ndkVersionFromDsl": "26.3.11579264",
+  "sdkFolder": "C:\\Users\\jariw\\AppData\\Local\\Android\\sdk",
+  "sideBySideNdkFolderNames": [
+    "26.3.11579264",
+    "27.0.12077973",
+    "28.0.12433566",
+    "28.0.12674087",
+    "28.0.13004108",
+    "29.0.13113456"
+  ]
+}
